@@ -98,12 +98,12 @@ const rootRoute = createRootRoute({
           <span aria-disabled="true" className="cursor-default pb-4 text-[#A69C8F]">Aprenda</span>
         </nav>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           <svg className="w-5 h-5 text-[#A69C8F] cursor-pointer hover:text-[#F5F0E6] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <Link to="/carrinho" className="relative cursor-pointer group">
+          <Link to="/carrinho" className="relative flex h-8 w-8 items-center justify-center cursor-pointer group">
             <span className="sr-only">Abrir carrinho, {cart.length} itens</span>
-            <svg className="w-5 h-5 text-[#A69C8F] group-hover:text-[#F5F0E6] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            {cart.length > 0 && <span aria-hidden="true" className="absolute -top-1.5 -right-1.5 flex h-3 min-w-3 items-center justify-center rounded-full bg-[#E8834A] px-0.5 text-[7px] font-black text-black">{cart.length}</span>}
+            <svg className="h-6 w-6 text-[#A69C8F] group-hover:text-[#F5F0E6] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            {cart.length > 0 && <span aria-hidden="true" className="absolute -top-2 -right-2 z-10 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E8834A] px-1 text-[11px] font-black leading-none text-black">{cart.length}</span>}
           </Link>
           <Link to={account ? '/perfil' : '/login'} className="ml-2 inline-flex items-center gap-1.5 rounded-md border border-[#E8834A] px-4 py-2 text-[13px] font-bold text-[#E8834A] transition hover:bg-[#E8834A] hover:text-black">
             {account ? account.name.split(' ')[0] : <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>Entrar</>}
@@ -136,7 +136,7 @@ const rootRoute = createRootRoute({
         </div>
         <div className="flex items-center gap-2">
           {pathname === '/' && <button type="button" aria-label="Ir para o catálogo" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })} className="flex h-8 w-8 items-center justify-center rounded bg-[#E8834A] text-[#1A1411]"><svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></button>}
-          <Link to="/carrinho" aria-label={`Abrir carrinho, ${cart.length} itens`} className="relative flex h-8 w-8 items-center justify-center rounded bg-[#2C1E17] text-[#E8834A]"><svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m1.6 8-2 2h12"/></svg>{cart.length > 0 && <span aria-hidden="true" className="absolute -right-1 -top-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-[#E8834A] px-1 text-[8px] font-bold text-black">{cart.length}</span>}</Link>
+          <Link to="/carrinho" aria-label={`Abrir carrinho, ${cart.length} itens`} className="relative flex h-8 w-8 items-center justify-center rounded bg-[#2C1E17] text-[#E8834A]"><svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m1.6 8-2 2h12"/></svg>{cart.length > 0 && <span aria-hidden="true" className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E8834A] px-1 text-[11px] font-bold leading-none text-black">{cart.length}</span>}</Link>
         </div>
       </header>}
 
