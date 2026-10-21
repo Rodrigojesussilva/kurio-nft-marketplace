@@ -1,0 +1,2035 @@
+{
+  "origin": "http://127.0.0.1:61824",
+  "generatedAt": "2026-10-21T02:30:16.332Z",
+  "versions": {
+    "node": "v22.23.1",
+    "lighthouse": "13.5.0",
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4",
+    "vite": "8.3.4"
+  },
+  "environment": {
+    "platform": "Windows_NT 10.0.26300",
+    "arch": "x64",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "logicalCpus": 8,
+    "totalMemoryBytes": 8362713088,
+    "buildArtifact": "dist/index.html",
+    "buildGeneratedAt": "2026-10-21T02:30:11.623Z"
+  },
+  "conditions": {
+    "build": "Vite production build (npm run build)",
+    "mocks": "MSW enabled in production build; default scenario; fresh isolated Chromium profile; no scenario query/localStorage overrides",
+    "network": "Lighthouse simulation presets: mobile Slow 4G (150 ms RTT, 1.6 Mbps, 4x CPU) and desktop Dense 4G (40 ms RTT, 10 Mbps, 1x CPU); exact settings in each JSON report",
+    "cache": "Lighthouse default storage/cache clearing; fresh browser profile; repeated navigations share the audit browser process",
+    "repetitionsPerTarget": 3,
+    "categories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ],
+    "viewports": {
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "deviceScaleFactor": 1
+      },
+      "desktop": {
+        "width": 1440,
+        "height": 900,
+        "deviceScaleFactor": 1
+      }
+    }
+  },
+  "runs": [
+    {
+      "target": "home-mobile",
+      "path": "/",
+      "formFactor": "mobile",
+      "run": 1,
+      "scores": {
+        "performance": 84,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3731.2110000000002,
+        "cls": 0,
+        "tbtMs": 127.5
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.57,
+          "displayValue": "3.7 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "score": 0.96,
+          "displayValue": "130 ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "home-mobile",
+      "path": "/",
+      "formFactor": "mobile",
+      "run": 2,
+      "scores": {
+        "performance": 87,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3450.5541500000004,
+        "cls": 0,
+        "tbtMs": 85.5
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.65,
+          "displayValue": "3.5 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "score": 0.99,
+          "displayValue": "90 ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "home-mobile",
+      "path": "/",
+      "formFactor": "mobile",
+      "run": 3,
+      "scores": {
+        "performance": 88,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3411.98425,
+        "cls": 0,
+        "tbtMs": 86.5
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.66,
+          "displayValue": "3.4 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "score": 0.99,
+          "displayValue": "90 ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "home-desktop",
+      "path": "/",
+      "formFactor": "desktop",
+      "run": 1,
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 1379.1627,
+        "cls": 0,
+        "tbtMs": 4.5
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.84,
+          "displayValue": "1.4 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 40 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "home-desktop",
+      "path": "/",
+      "formFactor": "desktop",
+      "run": 2,
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 1136.94365,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.91,
+          "displayValue": "1.1 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 40 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "home-desktop",
+      "path": "/",
+      "formFactor": "desktop",
+      "run": 3,
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 997.5062499999999,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.95,
+          "displayValue": "1.0 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0.5,
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 156 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-mobile",
+      "path": "/mercado/042",
+      "formFactor": "mobile",
+      "run": 1,
+      "scores": {
+        "performance": 89,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3287.5161,
+        "cls": 0,
+        "tbtMs": 29
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.7,
+          "displayValue": "3.3 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-mobile",
+      "path": "/mercado/042",
+      "formFactor": "mobile",
+      "run": 2,
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3193.3493,
+        "cls": 0,
+        "tbtMs": 26.999999999999886
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.73,
+          "displayValue": "3.2 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-mobile",
+      "path": "/mercado/042",
+      "formFactor": "mobile",
+      "run": 3,
+      "scores": {
+        "performance": 90,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 3209.6441999999997,
+        "cls": 0,
+        "tbtMs": 26
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.72,
+          "displayValue": "3.2 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 150 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-desktop",
+      "path": "/mercado/042",
+      "formFactor": "desktop",
+      "run": 1,
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 874.0302499999999,
+        "cls": 0.004236908436213992,
+        "tbtMs": 0
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.97,
+          "displayValue": "0.9 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0.5,
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-desktop",
+      "path": "/mercado/042",
+      "formFactor": "desktop",
+      "run": 2,
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 907.16985,
+        "cls": 0.004236908436213992,
+        "tbtMs": 0
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.96,
+          "displayValue": "0.9 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 40 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "target": "detail-desktop",
+      "path": "/mercado/042",
+      "formFactor": "desktop",
+      "run": 3,
+      "scores": {
+        "performance": 54,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "lcpMs": 1693.68,
+        "cls": 0.004236908436213992,
+        "tbtMs": 1686.7399999999998
+      },
+      "lighthouseSettings": {
+        "output": [
+          "html",
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": null
+      },
+      "diagnostics": {
+        "largest-contentful-paint": {
+          "title": "Largest Contentful Paint",
+          "score": 0.74,
+          "displayValue": "1.7 s",
+          "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+          "affected": []
+        },
+        "total-blocking-time": {
+          "title": "Total Blocking Time",
+          "score": 0,
+          "displayValue": "1,690 ms",
+          "description": "Sum of all time periods between FCP and Time to Interactive, when task length exceeded 50ms, expressed in milliseconds. [Learn more about the Total Blocking Time metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/).",
+          "affected": []
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 40 ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-CIgr2Dwx.css"
+            }
+          ]
+        },
+        "lcp-discovery-insight": {
+          "title": "LCP request discovery",
+          "score": 0,
+          "description": "[Optimize LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery) by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loading",
+          "affected": [
+            {},
+            {}
+          ]
+        },
+        "mainthread-work-breakdown": {
+          "title": "Minimize main-thread work",
+          "score": 0,
+          "displayValue": "4.7 s",
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+          "affected": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+          ]
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 158 KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+          "affected": [
+            {
+              "url": "http://127.0.0.1:61824/assets/index-BYyzBA3e.js"
+            },
+            {
+              "url": "http://127.0.0.1:61824/assets/browser-BU-oF7Ri.js"
+            }
+          ]
+        },
+        "errors-in-console": {
+          "title": "Browser errors were logged to the console",
+          "score": 0,
+          "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)",
+          "affected": [
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            },
+            {
+              "message": "WebSocket connection to 'ws://127.0.0.1:61824/socket.io/?EIO=4&transport=websocket' failed: Error during WebSocket handshake: Unexpected response code: 200"
+            }
+          ]
+        },
+        "robots-txt": {
+          "title": "robots.txt is not valid",
+          "score": 0,
+          "displayValue": "15 errors found",
+          "description": "If your robots.txt file is malformed, crawlers may not be able to understand how you want your website to be crawled or indexed. [Learn more about robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/).",
+          "affected": [
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            },
+            {
+              "message": "Syntax not understood"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "medians": {
+    "home-mobile": {
+      "performance": 87,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 92,
+      "metrics": {
+        "lcpMs": 3450.5541500000004,
+        "cls": 0,
+        "tbtMs": 86.5
+      }
+    },
+    "home-desktop": {
+      "performance": 97,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 92,
+      "metrics": {
+        "lcpMs": 1136.94365,
+        "cls": 0,
+        "tbtMs": 0
+      }
+    },
+    "detail-mobile": {
+      "performance": 90,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 92,
+      "metrics": {
+        "lcpMs": 3209.6441999999997,
+        "cls": 0,
+        "tbtMs": 26.999999999999886
+      }
+    },
+    "detail-desktop": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 92,
+      "metrics": {
+        "lcpMs": 907.16985,
+        "cls": 0.004236908436213992,
+        "tbtMs": 0
+      }
+    }
+  }
+}
