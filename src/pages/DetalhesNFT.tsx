@@ -29,8 +29,6 @@ export function DetalhesNFT() {
   })
   const [quantity, setQuantity] = useState(1)
   const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0)
-  const [addingCollectionItem, setAddingCollectionItem] = useState<string | null>(null)
-  const [collectionCartFeedback, setCollectionCartFeedback] = useState<{ id: string; message: string; error: boolean } | null>(null)
   const favorite = favoritesQuery.data?.ids.includes(nftId) ?? false
   const nft = nftQuery.data
   const [selectedEdition, setSelectedEdition] = useState('')
@@ -38,25 +36,12 @@ export function DetalhesNFT() {
   const currentEdition = editions.find((edition) => edition.id === selectedEdition) ?? editions.find((edition) => edition.available > 0)
   const maxQuantity = currentEdition ? Math.min(currentEdition.available, currentEdition.maxPerOrder) : 0
   const collectionItems = [
-    { id: '118', editionId: '1-10', name: 'Cosmic Bloom #118', price: '1.29 ETH', image: cosmicImage },
-    { id: '314', editionId: '1-10', name: 'Violet Nomad #314', price: '1.39 ETH', image: violetImage },
-    { id: '188', editionId: '1-10', name: 'Ivory Baron #188', price: '1.79 ETH', image: ivoryImage },
-    { id: '207', editionId: '1-10', name: 'Golden Beat #207', price: '0.99 ETH', image: goldenImage },
-    { id: '160', editionId: '1-10', name: 'Golden Signal #160', price: '0.39 ETH', image: goldenImage },
+    { id: '118', name: 'Cosmic Bloom #118', price: '1.29 ETH', image: cosmicImage },
+    { id: '314', name: 'Violet Nomad #314', price: '1.39 ETH', image: violetImage },
+    { id: '188', name: 'Ivory Baron #188', price: '1.79 ETH', image: ivoryImage },
+    { id: '207', name: 'Golden Beat #207', price: '0.99 ETH', image: goldenImage },
+    { id: '160', name: 'Golden Signal #160', price: '0.39 ETH', image: goldenImage },
   ]
-
-  const addCollectionItemToCart = async (item: (typeof collectionItems)[number]) => {
-    setAddingCollectionItem(item.id)
-    setCollectionCartFeedback(null)
-    try {
-      await addToCart(item.id, item.editionId, 1)
-      setCollectionCartFeedback({ id: item.id, message: `${item.name} foi adicionado ao carrinho.`, error: false })
-    } catch (cause) {
-      setCollectionCartFeedback({ id: item.id, message: getApiError(cause).message, error: true })
-    } finally {
-      setAddingCollectionItem(null)
-    }
-  }
 
   if (nftQuery.isLoading) return <main className="mx-auto min-h-[calc(100vh-64px)] w-full max-w-[1500px] px-3 py-8 lg:min-h-[1623px] lg:px-[13px]"><div role="status" aria-label="Carregando detalhes do NFT" className="grid gap-8 lg:grid-cols-2"><div className="skeleton-shimmer aspect-square rounded-2xl"/><div className="space-y-5 py-2"><div className="skeleton-shimmer h-8 w-2/3 rounded"/><div className="skeleton-shimmer h-4 w-1/3 rounded"/><div className="skeleton-shimmer h-24 rounded"/><div className="skeleton-shimmer h-12 rounded"/><div className="skeleton-shimmer h-10 w-1/2 rounded"/></div></div></main>
   if (nftQuery.isError) return <main className="mx-auto max-w-4xl px-6 py-16"><p role="alert" className="text-sm text-red-300">NFT não encontrado ou indisponível.</p><button onClick={() => void navigate({ to: '/' })} className="mt-4 text-sm text-[#E8834A]">Voltar ao início</button></main>
@@ -202,7 +187,7 @@ export function DetalhesNFT() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {collectionItems.map((item) => (
             <article key={item.name} className="group min-w-0 cursor-pointer">
-              <button type="button" disabled={addingCollectionItem !== null} onClick={() => void addCollectionItemToCart(item)} aria-label={`Adicionar ${item.name} ao carrinho`} className="block aspect-square w-full overflow-hidden rounded-xl bg-[#2C1E17] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8834A] disabled:cursor-wait">
+              <button type="button" onClick={() => void navigate({ to: '/mercado/$nftId', params: { nftId: item.id } })} aria-label={`Ver detalhes de ${item.name}`} className="block aspect-square w-full overflow-hidden rounded-xl bg-[#2C1E17] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8834A]">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -211,8 +196,6 @@ export function DetalhesNFT() {
               </button>
               <h3 className="mt-2 truncate text-sm font-bold text-[#F5F0E6]">{item.name}</h3>
               <p className="text-sm font-bold text-[#E8834A]">{item.price}</p>
-              {collectionCartFeedback?.id === item.id && <p role={collectionCartFeedback.error ? 'alert' : 'status'} className={`mt-1 text-[10px] ${collectionCartFeedback.error ? 'text-red-300' : 'text-[#C9A982]'}`}>{addingCollectionItem === item.id ? 'Adicionando ao carrinho…' : collectionCartFeedback.message}</p>}
-              {addingCollectionItem === item.id && collectionCartFeedback?.id !== item.id && <p role="status" className="mt-1 text-[10px] text-[#C9A982]">Adicionando ao carrinho…</p>}
             </article>
           ))}
         </div>
