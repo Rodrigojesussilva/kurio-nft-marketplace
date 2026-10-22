@@ -551,7 +551,7 @@ const handlers = [
 ]
 
 const socketLink = ws.link(/\/socket\.io/)
-socketLink.addEventListener('connection', (connection) => {
+const socketHandler = socketLink.addEventListener('connection', (connection) => {
   const binding = toSocketIo(connection)
   if (scenario() === 'socket-disconnect-once' && !socketDisconnectTriggered) {
     socketDisconnectTriggered = true
@@ -568,4 +568,4 @@ socketLink.addEventListener('connection', (connection) => {
   connection.client.addEventListener('close', () => socketClients.delete(client))
 })
 
-export { emitEvent, getDatabase, handlers, socketLink }
+export { emitEvent, getDatabase, handlers, socketHandler, socketLink }

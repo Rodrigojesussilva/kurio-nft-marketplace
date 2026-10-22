@@ -28,6 +28,8 @@ const queryClient = new QueryClient({
   },
 })
 
+let socketDisconnectTimer: ReturnType<typeof setTimeout> | undefined
+
 // Reuse the actual home page as the non-interactive backdrop for access dialogs.
 const AccessBackdrop = () => <Suspense fallback={null}><Inicio backdrop /></Suspense>
 
@@ -40,6 +42,10 @@ const rootRoute = createRootRoute({
     const isAccessRoute = pathname === '/login' || pathname === '/cadastro'
     const mobileTitle = pathname === '/' ? 'Explorar coleções' : pathname.startsWith('/mercado/') || pathname === '/mercado' ? 'Detalhes do NFT' : pathname === '/carrinho' ? 'Carrinho de NFTs' : pathname === '/pagamento' ? 'Pagamento com carteira' : pathname.startsWith('/confirmacao/') ? 'Confirmação do pedido' : pathname === '/perfil' ? 'Meu perfil' : pathname === '/carteiras' ? 'Carteiras' : 'Kurio'
     useEffect(() => {
+      if (socketDisconnectTimer) {
+        clearTimeout(socketDisconnectTimer)
+        socketDisconnectTimer = undefined
+      }
       const seenVersions = new Map<string, number>()
       const subscribe = () => socket.emit('session:subscribe', localStorage.getItem('token'))
       const onNftUpdated = (event: { id: string; version?: number; nft?: unknown }) => {
@@ -85,7 +91,12 @@ const rootRoute = createRootRoute({
         socket.off('connect', reconcile)
         socket.off('nft.updated', onNftUpdated)
         socket.off('order.updated', onOrderUpdated)
-        socket.disconnect()
+        // React StrictMode mounts, cleans up, and mounts effects again in
+        // development. Defer disconnect so the second setup can reuse the socket.
+        socketDisconnectTimer = setTimeout(() => {
+          socket.disconnect()
+          socketDisconnectTimer = undefined
+        }, 0)
       }
     }, [account?.id])
     return (
