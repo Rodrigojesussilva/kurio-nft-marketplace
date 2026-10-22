@@ -89,13 +89,13 @@ export function Inicio({ backdrop = false }: { backdrop?: boolean }) {
             <li className="flex justify-between text-[#A69C8F] hover:text-[#F5F0E6] cursor-pointer transition"><span>Solana</span><span className="text-[#A69C8F]">(65)</span></li>
           </ul>
         </div>
-        <div className="rounded-2xl bg-[#2C1E17] p-4 text-center cursor-pointer group transition">
+        <Link to="/mercado/$nftId" params={{ nftId: '999' }} aria-label="Ver detalhes do NFT em oferta" className="block rounded-2xl bg-[#2C1E17] p-4 text-center group transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8834A]">
           <p className="text-base text-[#E8834A] font-black tracking-wide mb-1">NFT EM DESTAQUE</p>
           <p className="text-base font-bold uppercase text-[#F5F0E6] mb-2">Oferta Limitada</p>
           <div className="w-full aspect-[5/6] overflow-hidden rounded-xl">
             <img src={offerImage} alt="NFT em oferta" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
           </div>
-        </div>
+        </Link>
       </aside>
       <div className="w-full min-w-0 max-w-[1053px] flex-1">
         <div className="mb-3 flex items-center justify-between gap-3 lg:mb-8">
