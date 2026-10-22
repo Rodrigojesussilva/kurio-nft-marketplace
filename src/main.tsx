@@ -1,20 +1,25 @@
-import { StrictMode, useEffect, useState } from 'react'
+import { lazy, StrictMode, Suspense, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createRouter, createRootRoute, createRoute, RouterProvider, Link, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { DetalhesNFT } from './pages/DetalhesNFT'
 import { Inicio } from './pages/Inicio'
-import { Carrinho } from './pages/Carrinho'
-import { Carteiras } from './pages/Carteiras'
-import { Confirmacao } from './pages/Confirmacao'
-import { Cadastro } from './pages/Cadastro'
-import { Login } from './pages/Login'
-import { Pagamento } from './pages/Pagamento'
-import { Perfil } from './pages/Perfil'
 import { ShopProvider, useShop } from './store'
 import { getSession } from './lib/api'
 import { socket } from './lib/socket'
 import './index.css'
+
+const Carrinho = lazy(() => import('./pages/Carrinho').then(({ Carrinho }) => ({ default: Carrinho })))
+const Carteiras = lazy(() => import('./pages/Carteiras').then(({ Carteiras }) => ({ default: Carteiras })))
+const Confirmacao = lazy(() => import('./pages/Confirmacao').then(({ Confirmacao }) => ({ default: Confirmacao })))
+const Cadastro = lazy(() => import('./pages/Cadastro').then(({ Cadastro }) => ({ default: Cadastro })))
+const Login = lazy(() => import('./pages/Login').then(({ Login }) => ({ default: Login })))
+const Pagamento = lazy(() => import('./pages/Pagamento').then(({ Pagamento }) => ({ default: Pagamento })))
+const Perfil = lazy(() => import('./pages/Perfil').then(({ Perfil }) => ({ default: Perfil })))
+
+function RouteFallback() {
+  return <main role="status" aria-label="Carregando página" className="mx-auto min-h-[60vh] w-full max-w-[1500px] px-4 py-8"><div className="skeleton-shimmer h-8 w-1/3 rounded"/><div className="skeleton-shimmer mt-6 h-64 rounded-xl"/></main>
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,7 +29,7 @@ const queryClient = new QueryClient({
 })
 
 // Reuse the actual home page as the non-interactive backdrop for access dialogs.
-const AccessBackdrop = () => <Inicio backdrop />
+const AccessBackdrop = () => <Suspense fallback={null}><Inicio backdrop /></Suspense>
 
 // ================= LAYOUT COM HEADER E FOOTER =================
 const rootRoute = createRootRoute({
@@ -142,7 +147,7 @@ const rootRoute = createRootRoute({
 
       <div className={`${isAccessRoute ? 'relative min-h-[calc(100vh-64px)]' : 'flex-1 pb-20 md:pb-0'}`}>
         {isAccessRoute && <div className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block" aria-hidden="true"><AccessBackdrop /></div>}
-        <div className={isAccessRoute ? 'relative z-40' : ''}><Outlet /></div>
+        <div className={isAccessRoute ? 'relative z-40' : ''}><Suspense fallback={<RouteFallback />}><Outlet /></Suspense></div>
       </div>
 
       {!isAccessRoute && <nav aria-label="Navegação principal" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-[#6B4228] bg-[#1C1310]/95 px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur md:hidden">

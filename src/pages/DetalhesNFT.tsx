@@ -3,10 +3,10 @@ import { useNavigate, useParams } from '@tanstack/react-router'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addFavorite, getApiError, getFavorites, getNft, removeFavorite } from '../lib/api'
 import { useShop } from '../store'
-import cosmicImage from '../assets/images/cosmic.png'
-import violetImage from '../assets/images/violet.png'
-import ivoryImage from '../assets/images/ivory.png'
-import goldenImage from '../assets/images/Golden.png'
+import cosmicImage from '../assets/images/cosmic.webp'
+import violetImage from '../assets/images/violet.webp'
+import ivoryImage from '../assets/images/ivory.webp'
+import goldenImage from '../assets/images/Golden.webp'
 
 export function DetalhesNFT() {
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ export function DetalhesNFT() {
   const nft = nftQuery.data
   const [selectedEdition, setSelectedEdition] = useState('')
   const editions = Array.isArray(nft?.edition) ? nft.edition : []
-  const currentEdition = editions.find((edition) => edition.id === selectedEdition) ?? editions.find((edition) => edition.available > 0)
+  const currentEdition = editions.find((edition) => edition.id === selectedEdition && edition.available > 0) ?? editions.find((edition) => edition.available > 0)
   const maxQuantity = currentEdition ? Math.min(currentEdition.available, currentEdition.maxPerOrder) : 0
   const collectionItems = [
     { id: '118', name: 'Cosmic Bloom #118', price: '1.29 ETH', image: cosmicImage },
@@ -99,9 +99,10 @@ export function DetalhesNFT() {
           <div className="mb-5 border-none">
             <h2 className="mb-2 text-sm font-bold text-white md:text-lg">Edição:</h2>
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#A69C8F] md:text-base">
-              {editions.map((edition) => <button key={edition.id} type="button" disabled={edition.available === 0} aria-pressed={selectedEdition === edition.id || (!selectedEdition && edition.id === editions.find((item) => item.available > 0)?.id)} onClick={() => setSelectedEdition(edition.id)} className={`rounded-full border px-3 py-1 ${selectedEdition === edition.id || (!selectedEdition && edition.id === editions.find((item) => item.available > 0)?.id) ? 'border-[#E8834A] text-[#E8834A]' : 'border-[#6B4228] text-[#A69C8F]'} disabled:opacity-40`}>{edition.label}</button>)}
-              <span className="ml-1 text-sm tracking-wider text-[#C9A982]">ABERTA</span>
+              {editions.map((edition) => <button key={edition.id} type="button" disabled={edition.available === 0} aria-label={`${edition.label}${edition.available === 0 ? ' (esgotada)' : ` (${edition.available} disponíveis)`}`} aria-pressed={currentEdition?.id === edition.id} onClick={() => { setSelectedEdition(edition.id); setQuantity(1) }} className={`rounded-full border px-3 py-1 ${currentEdition?.id === edition.id ? 'border-[#E8834A] text-[#E8834A]' : 'border-[#6B4228] text-[#A69C8F]'} disabled:opacity-40`}>{edition.label}</button>)}
+              <span className="ml-1 text-sm tracking-wider text-[#C9A982]">{currentEdition ? 'ABERTA' : 'ESGOTADA'}</span>
             </div>
+            {!currentEdition && <p role="status" className="mt-2 text-sm text-amber-200">Todas as edições deste NFT estão esgotadas.</p>}
           </div>
 
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4">

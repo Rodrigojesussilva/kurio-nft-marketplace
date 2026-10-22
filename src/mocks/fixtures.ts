@@ -1,11 +1,11 @@
-import emeraldImage from '../assets/images/Emerald.png'
-import sageImage from '../assets/images/Sage.png'
-import neonImage from '../assets/images/neon.png'
-import cosmicImage from '../assets/images/cosmic.png'
-import violetImage from '../assets/images/violet.png'
-import ivoryImage from '../assets/images/ivory.png'
-import goldenImage from '../assets/images/Golden.png'
-import offerImage from '../assets/images/oferta.png'
+import emeraldImage from '../assets/images/Emerald.webp'
+import sageImage from '../assets/images/Sage.webp'
+import neonImage from '../assets/images/neon.webp'
+import cosmicImage from '../assets/images/cosmic.webp'
+import violetImage from '../assets/images/violet.webp'
+import ivoryImage from '../assets/images/ivory.webp'
+import goldenImage from '../assets/images/Golden.webp'
+import offerImage from '../assets/images/oferta.webp'
 
 export type Edition = { id: string; label: string; available: number; maxPerOrder: number }
 export type NFT = {
@@ -51,7 +51,7 @@ export const initialNfts: NFT[] = [
   { id: '314', name: 'Violet Nomad #314', priceEth: '1.39', image: violetImage, artist: 'Violet Nomad', collection: 'Kurio Nomads', category: 'Fotografia', network: 'Ethereum', rating: 4.6, reviewCount: 14, edition: [{ id: '1-10', label: '1/10', available: 20, maxPerOrder: 10 }], version: 1 },
   { id: '188', name: 'Ivory Baron #188', priceEth: '1.79', image: ivoryImage, artist: 'M. Ikeda', collection: 'Ivory Series', category: 'Fotografia', network: 'Solana', rating: 4.8, reviewCount: 16, edition: [{ id: '1-10', label: '1/10', available: 20, maxPerOrder: 10 }], version: 1 },
   { id: '207', name: 'Golden Beat #207', priceEth: '0.99', image: goldenImage, artist: 'Omar Vale', collection: 'Golden Signals', category: 'Arte 3D', network: 'Polygon', rating: 4.5, reviewCount: 7, edition: [{ id: '1-10', label: '1/10', available: 6, maxPerOrder: 4 }], version: 1 },
-  { id: '999', name: 'Crystal Ape #999', priceEth: '1.49', image: offerImage, artist: 'Nova Sato', collection: 'Kurio Apes', category: 'Arte digital', network: 'Ethereum', rating: 4.9, reviewCount: 31, edition: [{ id: '1-1', label: '1/1', available: 0, maxPerOrder: 1 }], version: 1 },
+  { id: '999', name: 'Crystal Ape #999', priceEth: '1.49', image: offerImage, artist: 'Nova Sato', collection: 'Kurio Apes', category: 'Arte digital', network: 'Ethereum', rating: 4.9, reviewCount: 31, edition: [{ id: '1-1', label: '1/1', available: 0, maxPerOrder: 1 }, { id: '1-10', label: '1/10', available: 8, maxPerOrder: 3 }, { id: '1-30', label: '1/30', available: 24, maxPerOrder: 5 }], version: 1 },
   { id: '160', name: 'Golden Signal #160', priceEth: '0.39', image: goldenImage, artist: 'Omar Vale', collection: 'Golden Signals', category: 'Música', network: 'Ethereum', rating: 4.7, reviewCount: 11, edition: [{ id: '1-10', label: '1/10', available: 5, maxPerOrder: 4 }], version: 1 },
 ]
 

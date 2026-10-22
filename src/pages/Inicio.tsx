@@ -1,13 +1,13 @@
 import { Link } from '@tanstack/react-router'
 import { CatalogGrid } from '../components/CatalogGrid'
-import heroImage from '../assets/images/image.png'
-import offerImage from '../assets/images/oferta.png'
-import emeraldImage from '../assets/images/Emerald.png'
-import ivoryImage from '../assets/images/ivory.png'
-import sageImage from '../assets/images/Sage.png'
-import neonImage from '../assets/images/neon.png'
-import goldenImage from '../assets/images/Golden.png'
-import cosmicImage from '../assets/images/cosmic.png'
+import heroImage from '../assets/images/image.webp'
+import offerImage from '../assets/images/oferta.webp'
+import emeraldImage from '../assets/images/Emerald.webp'
+import ivoryImage from '../assets/images/ivory.webp'
+import sageImage from '../assets/images/Sage.webp'
+import neonImage from '../assets/images/neon.webp'
+import goldenImage from '../assets/images/Golden.webp'
+import cosmicImage from '../assets/images/cosmic.webp'
 
 const catalogPreviewItems = [
   { name: 'Emerald Ape #042', price: '1.19', image: emeraldImage },
@@ -27,10 +27,10 @@ function CatalogPreview() {
 export function Inicio({ backdrop = false }: { backdrop?: boolean }) {
   return (
   <div>
-    <main className="relative mx-auto flex min-h-0 w-full flex-row items-center justify-between gap-3 px-4 pb-6 pt-5 md:min-h-[680px] md:flex-row md:gap-12 md:px-8 md:pb-16 md:pt-10 lg:px-[5.4vw]">
-      <div className="min-w-0 flex-1 md:max-w-[760px]">
+    <main className="relative mx-auto flex min-h-0 w-full flex-row items-center gap-3 px-4 pb-6 pt-5 md:gap-8 md:px-8 md:py-8 lg:gap-10 lg:px-[5.4vw] lg:py-10">
+      <div className="min-w-0 flex-1">
         <p className="mb-2 hidden text-base font-bold tracking-[0.15em] text-[#F5F0E6] md:mb-6 md:block">Bem-vindo à Kurio</p>
-        <h1 className="mb-2 text-[clamp(1.05rem,5vw,1.45rem)] font-black uppercase leading-[1.12] tracking-tight text-[#F5F0E6] md:mb-1 md:text-[56px] md:leading-[1.7]">
+        <h1 className="mb-2 text-[clamp(1.05rem,5vw,1.45rem)] font-black uppercase leading-[1.12] tracking-tight text-[#F5F0E6] md:mb-1 md:text-[clamp(1.75rem,3.4vw,3.5rem)] md:leading-[1.2]">
           Seja dono do futuro <br /> da arte digital
         </h1>
         <p className="mb-3 line-clamp-3 max-w-[700px] text-[10px] leading-[1.45] text-[#C9A982] md:mb-10 md:text-lg md:leading-[1.65]">
@@ -46,7 +46,7 @@ export function Inicio({ backdrop = false }: { backdrop?: boolean }) {
         <span className="h-[10px] w-[10px] rounded-full bg-[#725342]" />
         <span className="h-[10px] w-[10px] rounded-full bg-[#E8834A]" />
       </div>
-      <div className="w-[42%] max-w-[170px] shrink-0 md:w-[min(36.5vw,700px)] md:max-w-none">
+      <div className="w-[42%] max-w-[170px] shrink-0 md:w-[min(43%,620px)] md:max-w-[620px]">
         <div className="aspect-square overflow-hidden rounded-xl bg-[#2C1E17] shadow-2xl md:rounded-[28px]">
           <img src={heroImage} alt="Macaco de óculos com jaqueta verde" fetchPriority="high" loading="eager" className="w-full h-full object-cover" />
         </div>

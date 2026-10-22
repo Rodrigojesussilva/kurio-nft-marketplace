@@ -9,9 +9,12 @@
     "build": "tsc -b && vite build",
     "build:mocks": "tsc -b && vite build --mode production",
     "lint": "oxlint",
+    "assets:optimize": "node scripts/convert-assets.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "test:e2e": "playwright test",
+    "test:visual": "playwright test e2e/visual.spec.ts",
+    "test:visual:update": "playwright test e2e/visual.spec.ts --update-snapshots",
     "test:e2e:report": "playwright show-report",
     "audit:lighthouse": "npm run build && node scripts/lighthouse-audit.mjs"
   },

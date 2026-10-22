@@ -22,6 +22,7 @@ type ShopState = {
   connectWallet: (address?: string) => Promise<string>
   createOrder: (payment: string, quote: Quote, idempotencyKey: string, collector: { name: string; email: string }, walletAddress?: string) => Promise<Order>
   applyCoupon: (code: string) => Promise<boolean>
+  clearCoupon: () => void
 }
 
 const ShopContext = createContext<ShopState | null>(null)
@@ -159,6 +160,11 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     } catch { return false }
   }
 
+  const clearCoupon = () => {
+    setCoupon('')
+    localStorage.removeItem('kurio-coupon')
+  }
+
   const createOrder = (payment: string, quote: Quote, idempotencyKey: string, collector: { name: string; email: string }, walletAddress?: string) => service.createOrder({
     items: cart.map(({ nftId, editionId, quantity }) => ({ nftId, editionId, quantity })),
     payment,
@@ -171,7 +177,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const value: ShopState = {
     cart, account, updateAccount, wallet, coupon, cartLoading: cartQuery.isLoading,
     addToCart, removeFromCart, setQuantity, signIn, register, signOut,
-    connectWallet, createOrder, applyCoupon,
+    connectWallet, createOrder, applyCoupon, clearCoupon,
   }
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>
 }

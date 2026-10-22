@@ -1,65 +1,66 @@
-Ôªø# Arquitetura e decis√µes
+# Arquitetura e decisıes
 
-## Organiza√ß√£o
+## OrganizaÁ„o
 
-- `src/main.tsx`: Router, shell, guards de sess√£o, cache Query e ciclo de conex√£o Socket.IO.
-- `src/pages/`: telas de In√≠cio, Detalhes do NFT, Carrinho, Pagamento, Confirma√ß√£o, Login, Cadastro, Perfil e Carteiras.
-- `src/components/`: componentes compartilhados e componentes visuais no padr√£o shadcn/ui.
-- `src/lib/api.ts`: tipos REST, cliente Axios, serializa√ß√£o e erros.
-- `src/store.tsx`: sess√£o, carrinho e opera√ß√µes que coordenam REST e cache.
-- `src/mocks/fixtures.ts`: fixtures de usu√°rios e NFTs; `src/mocks/handlers.ts`: servi√ßo simulado REST e eventos.
-- `e2e/marketplace.spec.ts`: cen√°rios Playwright.
-- `scripts/lighthouse-audit.mjs`: execu√ß√£o reproduz√≠vel do Lighthouse.
+- `src/main.tsx`: Router, shell, guards de sess„o, cache Query e ciclo de conex„o Socket.IO.
+- `src/pages/`: telas de InÌcio, Detalhes do NFT, Carrinho, Pagamento, ConfirmaÁ„o, Login, Cadastro, Perfil e Carteiras.
+- `src/components/`: componentes compartilhados e componentes visuais no padr„o shadcn/ui.
+- `src/lib/api.ts`: tipos REST, cliente Axios, serializaÁ„o e erros.
+- `src/store.tsx`: sess„o, carrinho e operaÁıes que coordenam REST e cache.
+- `src/mocks/fixtures.ts`: fixtures de usu·rios e NFTs; `src/mocks/handlers.ts`: serviÁo simulado REST e eventos.
+- `e2e/marketplace.spec.ts`: cen·rios Playwright.
+- `scripts/lighthouse-audit.mjs`: execuÁ„o reproduzÌvel do Lighthouse.
+- `e2e/visual.spec.ts` e `e2e/visual.spec.ts-snapshots/`: regress„o visual das telas principais em 390, 768 e 1440 px.
 
 ## Contratos REST
 
 Os contratos TypeScript e as chamadas Axios ficam em `src/lib/api.ts`; MSW os implementa na camada de rede em `src/mocks/handlers.ts`.
 
-| Recurso | Opera√ß√µes |
+| Recurso | OperaÁıes |
 | --- | --- |
-| Sess√£o/conta | `POST /api/session/register`, `POST /api/session/login`, `GET /api/session`, `POST /api/session/logout`. |
-| NFTs | `GET /api/nfts` (busca, filtros, ordena√ß√£o e pagina√ß√£o), `GET /api/nfts/:id`. |
+| Sess„o/conta | `POST /api/session/register`, `POST /api/session/login`, `GET /api/session`, `POST /api/session/logout`. |
+| NFTs | `GET /api/nfts` (busca, filtros, ordenaÁ„o e paginaÁ„o), `GET /api/nfts/:id`. |
 | Favoritos | `GET /api/favorites`, `POST /api/favorites/:id`, `DELETE /api/favorites/:id`. |
 | Carrinho | `GET /api/cart`, `POST /api/cart/items`, `PATCH /api/cart/items/:nftId/:editionId`, `DELETE /api/cart/items/:nftId/:editionId`. |
-| Cota√ß√£o | `POST /api/quote`, valida cupom, vers√µes, pre√ßo, disponibilidade, taxas e total. |
-| Pedidos | `POST /api/orders` (cabe√ßalho `Idempotency-Key`), `GET /api/orders/:id`. |
+| CotaÁ„o | `POST /api/quote`, valida cupom, versıes, preÁo, disponibilidade, taxas e total. |
+| Pedidos | `POST /api/orders` (cabeÁalho `Idempotency-Key`), `GET /api/orders/:id`. |
 | Perfil | `GET/PATCH /api/profile`, `POST /api/profile/password`. |
 | Carteiras | `GET/POST /api/wallets`, `PATCH/DELETE /api/wallets/:id`. |
 
-Erros usam `{ error: { code, message, details? } }` com HTTP 4xx/5xx para valida√ß√£o, sess√£o expirada/inv√°lida, falta de permiss√£o, inexist√™ncia, conflito de estoque/cota√ß√£o, timeout e falha transit√≥ria. ETH trafega como string decimal; c√°lculos monet√°rios usam `bigint` em wei. A cria√ß√£o do pedido valida cota√ß√£o/vers√µes e associa a chave de idempot√™ncia ao usu√°rio e ao fingerprint do payload: conte√∫do id√™ntico recupera o mesmo pedido; chave reaproveitada para conte√∫do diferente √© conflito.
+Erros usam `{ error: { code, message, details? } }` com HTTP 4xx/5xx para validaÁ„o, sess„o expirada/inv·lida, falta de permiss„o, inexistÍncia, conflito de estoque/cotaÁ„o, timeout e falha transitÛria. ETH trafega como string decimal; c·lculos monet·rios usam `bigint` em wei. A criaÁ„o do pedido valida cotaÁ„o/versıes e associa a chave de idempotÍncia ao usu·rio e ao fingerprint do payload: conte˙do idÍntico recupera o mesmo pedido; chave reaproveitada para conte˙do diferente È conflito.
 
-## Sess√£o, dados locais e carrinho
+## Sess„o, dados locais e carrinho
 
-O token Bearer √© fict√≠cio e fica no localStorage para reproduzir login e expira√ß√£o. Cada opera√ß√£o autenticada resolve o usu√°rio pelo token; dados de perfil, favoritos, carteiras, carrinho e pedidos s√£o indexados pelo `userId`. Tokens expiram em uma hora (ou 30 segundos no cen√°rio `short-session`). Isso demonstra isolamento no browser, sem pretens√£o de seguran√ßa de servidor real.
+O token Bearer È fictÌcio e fica no localStorage para reproduzir login e expiraÁ„o. Cada operaÁ„o autenticada resolve o usu·rio pelo token; dados de perfil, favoritos, carteiras, carrinho e pedidos s„o indexados pelo `userId`. Tokens expiram em uma hora (ou 30 segundos no cen·rio `short-session`). Isso demonstra isolamento no browser, sem pretens„o de seguranÁa de servidor real.
 
-O visitante tem carrinho pr√≥prio. Login/cadastro combinam o carrinho visitante com o da conta e limitam quantidade √† disponibilidade e ao m√°ximo por pedido. O Query cache separa carrinho por usu√°rio (`['cart', userId]`). As muta√ß√µes REST atualizam/inv√°lidam o cache; estado do pedido √© lido por ID. Os dados mock persistem em localStorage para suportar refresh; `POST /api/scenario/reset` restaura integralmente os fixtures e remove estado de usu√°rio/sess√£o/cen√°rio.
+O visitante tem carrinho prÛprio. Login/cadastro combinam o carrinho visitante com o da conta e limitam quantidade ‡ disponibilidade e ao m·ximo por pedido. O Query cache separa carrinho por usu·rio (`['cart', userId]`). As mutaÁıes REST atualizam/inv·lidam o cache; estado do pedido È lido por ID. Os dados mock persistem em localStorage para suportar refresh; `POST /api/scenario/reset` restaura integralmente os fixtures e remove estado de usu·rio/sess„o/cen·rio.
 
 ## Query, REST e Socket.IO
 
-TanStack Query usa chaves por recurso/usu√°rio, fornece `AbortSignal` √†s requisi√ß√µes Axios e preserva filtros/p√°gina na URL para permitir reload e deep link. O shell conecta `socket.io-client` e inscreve o token em `session:subscribe`. `nft.updated` atualiza NFT em cache e invalida cat√°logo, carrinho e cota√ß√£o; checkout rejeita vers√£o/cota√ß√£o antiga e exige revis√£o. `order.updated` atualiza apenas pedido pendente; confirmado e recusado s√£o terminais. Vers√µes est√°veis permitem ignorar duplicatas e eventos atrasados. Na reconex√£o, o cliente reinscreve a sess√£o e invalida recursos ativos via REST. Listeners s√£o removidos na troca de sess√£o/desmontagem.
+TanStack Query usa chaves por recurso/usu·rio, fornece `AbortSignal` ‡s requisiÁıes Axios e preserva filtros/p·gina na URL para permitir reload e deep link. O shell conecta `socket.io-client` e inscreve o token em `session:subscribe`. `nft.updated` atualiza NFT em cache e invalida cat·logo, carrinho e cotaÁ„o; checkout rejeita vers„o/cotaÁ„o antiga e exige revis„o. `order.updated` atualiza apenas pedido pendente; confirmado e recusado s„o terminais. Versıes est·veis permitem ignorar duplicatas e eventos atrasados. Na reconex„o, o cliente reinscreve a sess„o e invalida recursos ativos via REST. Listeners s„o removidos na troca de sess„o/desmontagem.
 
-A simula√ß√£o Socket.IO √© feita com `@mswjs/socket.io-binding` sobre WebSocket interceptado pelo MSW. √â suficiente para desenvolvimento e E2E, mas n√£o implementa servidor/protocolo operacional de produ√ß√£o; o handshake pode gerar aviso de console. N√£o h√° API, autentica√ß√£o, banco, socket ou blockchain privados necess√°rios no build de demonstra√ß√£o.
+A simulaÁ„o Socket.IO È feita com `@mswjs/socket.io-binding` sobre WebSocket interceptado pelo MSW. … suficiente para desenvolvimento e E2E, mas n„o implementa servidor/protocolo operacional de produÁ„o; o handshake pode gerar aviso de console. N„o h· API, autenticaÁ„o, banco, socket ou blockchain privados necess·rios no build de demonstraÁ„o.
 
-## Mocking e falhas reproduz√≠veis
+## Mocking e falhas reproduzÌveis
 
-`VITE_MOCKS=true` nos modos development/production inicia worker MSW no browser. Fixtures determin√≠sticas incluem duas contas e cat√°logo variado. O cen√°rio vem de `localStorage['kurio-scenario']`, com `?scenario=...` como alternativa. Login limpa o cen√°rio para permitir autentica√ß√£o; selecione cen√°rio protegido depois de entrar. `POST /api/scenario/reset` restaura completamente estado, token e cen√°rio.
+`VITE_MOCKS=true` nos modos development/production inicia worker MSW no browser. Fixtures determinÌsticas incluem duas contas e cat·logo variado. O cen·rio vem de `localStorage['kurio-scenario']`, com `?scenario=...` como alternativa. Login limpa o cen·rio para permitir autenticaÁ„o; selecione cen·rio protegido depois de entrar. `POST /api/scenario/reset` restaura completamente estado, token e cen·rio.
 
-Cen√°rios suportados: `standard`, `slow`, `variable-latency`, `offline`, `network-timeout`, `http-500`, `empty`, `sold-out`, `expired-session`, `short-session`, `mutation-failure`, `price-changed`, `timeout-after-create`, `payment-rejected`, `payment-rejected-after-pending`, `rejected-order`, `socket-disconnect-once` e `socket-disconnect-pending-order`. Eles cobrem lat√™ncia/ordem vari√°vel, conex√£o indispon√≠vel, timeout e erros HTTP, sess√£o, conflitos, cupom, mudan√ßa de pre√ßo/estoque, idempot√™ncia, recusa e reconcilia√ß√£o ap√≥s desconex√£o.
+Cen·rios suportados: `standard`, `slow`, `variable-latency`, `offline`, `network-timeout`, `http-500`, `empty`, `sold-out`, `expired-session`, `short-session`, `mutation-failure`, `price-changed`, `timeout-after-create`, `payment-rejected`, `payment-rejected-after-pending`, `rejected-order`, `socket-disconnect-once` e `socket-disconnect-pending-order`. Eles cobrem latÍncia/ordem vari·vel, conex„o indisponÌvel, timeout e erros HTTP, sess„o, conflitos, cupom, mudanÁa de preÁo/estoque, idempotÍncia, recusa e reconciliaÁ„o apÛs desconex„o.
 
-## UX, Figma e limita√ß√µes
+## UX, Figma e limitaÁıes
 
-As telas seguem a identidade escura, tipografia monoespa√ßada, detalhes cobre e refer√™ncia responsiva recebida. O modal de acesso escurece a p√°gina; o desktop usa o In√≠cio como fundo n√£o interativo, renderizando uma pr√©via do cat√°logo sem os hooks da rota inicial. As medi√ß√µes e assets est√£o descritos em `reports/lighthouse/audit-summary.md`. Desvios: autentica√ß√£o social, recupera√ß√£o de senha, movimenta√ß√£o real de carteira, pagamentos e links de transa√ß√£o s√£o apenas demonstra√ß√£o; n√£o h√° assinatura de blockchain. O binding Socket.IO √© simula√ß√£o local. Ativos, usu√°rio e persist√™ncia ficam no navegador, portanto n√£o existe prote√ß√£o de dados entre dispositivos/servidores.
+As telas seguem a identidade escura, tipografia monoespaÁada, detalhes cobre e referÍncia responsiva recebida. O modal de acesso escurece a p·gina; o desktop usa o InÌcio como fundo n„o interativo, renderizando uma prÈvia do cat·logo sem os hooks da rota inicial. As mediÁıes e assets est„o descritos em `reports/lighthouse/audit-summary.md`. Desvios: autenticaÁ„o social, recuperaÁ„o de senha, movimentaÁ„o real de carteira, pagamentos e links de transaÁ„o s„o apenas demonstraÁ„o; n„o h· assinatura de blockchain. O binding Socket.IO È simulaÁ„o local. Ativos, usu·rio e persistÍncia ficam no navegador, portanto n„o existe proteÁ„o de dados entre dispositivos/servidores.
 
-## Execu√ß√£o e verifica√ß√£o
+## ExecuÁ„o e verificaÁ„o
 
-- `npm ci`: instala vers√µes travadas por `package-lock.json`.
+- `npm ci`: instala versıes travadas por `package-lock.json`.
 - `npm run dev:mocks`: desenvolvimento com MSW.
-- `npm run build:mocks`: typecheck e build de demonstra√ß√£o.
+- `npm run build:mocks`: typecheck e build de demonstraÁ„o.
 - `npm run preview`: serve `dist`.
-- `npm run typecheck`, `npm run lint`, `npm run test:e2e` e `npm run audit:lighthouse`: verifica√ß√µes de tipos, lint, E2E e auditoria.
+- `npm run typecheck`, `npm run lint`, `npm run test:e2e` e `npm run audit:lighthouse`: verificaÁıes de tipos, lint, E2E e auditoria.
 
-E2E usa Playwright Chromium desktop/mobile e cobre cat√°logo, falhas de login, compra, perfil, carteiras, isolamento entre contas, reconex√£o e falha/recupera√ß√£o de pedidos. O Lighthouse executa tr√™s vezes por In√≠cio/Detalhe e mobile/desktop. A execu√ß√£o de refer√™ncia em `reports/lighthouse/summary.json` foi gerada em 2026-10-21 UTC: In√≠cio mobile 87/100/96/92; In√≠cio desktop 97/100/96/92; detalhe mobile 90/100/96/92; detalhe desktop 99/100/96/92 (Performance/Acessibilidade/Boas pr√°ticas/SEO). Performance do In√≠cio mobile permanece 3 pontos abaixo da meta. Consulte os relat√≥rios HTML/JSON e o resumo para m√©tricas LCP/CLS/TBT e condi√ß√µes de execu√ß√£o.
+E2E usa Playwright Chromium em viewports de 390, 768 e 1440 px. A suÌte cobre cat·logo, compra, conta, isolamento, rollback de favoritos, persistÍncia e migraÁ„o do carrinho, recuperaÁ„o idempotente, reconex„o e estado do pedido; veja `e2e/marketplace.spec.ts` para os cen·rios implementados. `e2e/visual.spec.ts` mantÈm snapshots de InÌcio, detalhe, carrinho e pagamento; atualize-os deliberadamente com `npx playwright test e2e/visual.spec.ts --update-snapshots`. O Lighthouse executa trÍs vezes por InÌcio/Detalhe e mobile/desktop. Consulte `reports/lighthouse/summary.json` para as medianas, mÈtricas LCP/CLS/TBT e condiÁıes efetivamente medidas.
 
-## Publica√ß√£o
+## PublicaÁ„o
 
-`vercel.json` configura `npm ci`, build de demonstra√ß√£o, sa√≠da `dist` e fallback das rotas SPA. MSW e `public/mockServiceWorker.js` s√£o parte do deploy. Reposit√≥rio remoto e URL p√∫blica devem ser preenchidos ap√≥s conectar/publicar o projeto; n√£o h√° URL de deploy registrada neste checkout.
+`vercel.json` configura `npm ci`, build de demonstraÁ„o, saÌda `dist` e fallback das rotas SPA. MSW e `public/mockServiceWorker.js` s„o parte do deploy. RepositÛrio remoto e URL p˙blica devem ser preenchidos apÛs conectar/publicar o projeto; n„o h· URL de deploy registrada neste checkout.

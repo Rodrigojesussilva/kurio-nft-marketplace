@@ -1,5 +1,31 @@
 import { expect, test } from '@playwright/test'
 
+test('featured NFT stays visible and recovers its available editions from old saved mock data', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByText('Crystal Ape #999', { exact: true })).toBeVisible()
+  await expect(page.getByText('1.49 ETH', { exact: true })).toBeVisible()
+  await page.goto('/mercado/999')
+
+  await page.evaluate(() => {
+    const database = JSON.parse(localStorage.getItem('kurio-mock-database-v1') ?? '{}')
+    const nft = database.nfts?.find((item: { id: string }) => item.id === '999')
+    if (nft) nft.edition = [{ id: '1-1', label: '1/1', available: 0, maxPerOrder: 1 }]
+    localStorage.setItem('kurio-mock-database-v1', JSON.stringify(database))
+  })
+  await page.reload()
+
+  const editionTen = page.getByRole('button', { name: /^1\/10/ })
+  const editionThirty = page.getByRole('button', { name: /^1\/30/ })
+  await expect(editionTen).toBeEnabled()
+  await expect(editionThirty).toBeEnabled()
+  await editionThirty.click()
+  await page.getByRole('button', { name: 'Aumentar quantidade' }).click()
+  await expect(page.locator('output')).toHaveText('2')
+  await page.getByRole('button', { name: 'Comprar' }).click()
+  await expect(page).toHaveURL(/\/carrinho$/)
+  await expect(page.getByText('Crystal Ape #999')).toBeVisible()
+})
+
 test('catalog supports search, combined filters, URL state, and NFT detail deep links', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByText('Emerald Ape #042', { exact: true })).toBeVisible()
@@ -173,4 +199,133 @@ test('pending order survives socket interruption and reconnects without a duplic
   expect(orderCreations).toBe(1)
   await expect(page.getByRole('heading', { name: 'Pedido confirmado' })).toBeVisible({ timeout: 12_000 })
   expect(orderCreations).toBe(1)
+})
+
+test('catalog pagination survives browser history and resets when a filter changes', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByText('Emerald Ape #042', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '2', exact: true }).click()
+  await expect(page).toHaveURL(/page=2/)
+  await expect(page.getByText('Emerald Ape #042', { exact: true })).toHaveCount(0)
+  await page.goBack()
+  await expect(page).toHaveURL(/\/?(?:\?page=1)?$/)
+  await expect(page.getByText('Emerald Ape #042', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '2', exact: true }).click()
+  await page.getByText('Busca e filtros').click()
+  await page.getByLabel('Ordenar NFTs').selectOption('price-asc')
+  await expect(page).toHaveURL(/sort=price-asc/)
+  await page.getByRole('button', { name: '2', exact: true }).click()
+  await page.getByLabel('Rede', { exact: true }).selectOption('Polygon')
+  await expect(page).not.toHaveURL(/page=2/)
+})
+
+test('direct NFT deep link reports an unknown resource', async ({ page }) => {
+  await page.goto('/mercado/not-a-real-nft')
+  await expect(page.getByRole('alert')).toContainText('NFT não encontrado')
+})
+
+test('favorite mutation failure rolls back its optimistic state', async ({ page }) => {
+  await page.goto('/login?returnTo=%2Fperfil')
+  await page.getByLabel('E-mail').fill('ana@kurio.test')
+  await page.getByLabel('Senha').fill('kurio123')
+  await page.getByRole('button', { name: 'Entrar' }).click()
+  await expect(page).toHaveURL(/\/perfil$/)
+  await page.goto('/mercado/042')
+  await page.evaluate(() => localStorage.setItem('kurio-scenario', 'mutation-failure'))
+  const favorite = page.getByRole('button', { name: 'Favoritar' })
+  await expect(favorite).toHaveAttribute('aria-pressed', 'false')
+  await favorite.click()
+  await expect(page.getByRole('alert')).toContainText('Não foi possível salvar o favorito.')
+  await expect(favorite).toHaveAttribute('aria-pressed', 'false')
+})
+
+test('cart coupon can be applied, removed and remains cleared after refresh', async ({ page }) => {
+  await page.goto('/carrinho')
+  await page.getByLabel('Código promocional').fill('KURIO10')
+  await page.getByRole('button', { name: 'Aplicar' }).click()
+  await expect(page.getByRole('status')).toContainText('Cupom KURIO10 aplicado.')
+  await expect(page.getByText(/2\.703/)).toBeVisible()
+  await page.getByRole('button', { name: 'Remover cupom' }).click()
+  await expect(page.getByRole('status')).toContainText('Cupom removido.')
+  await expect(page.getByRole('button', { name: 'Remover cupom' })).toHaveCount(0)
+  await page.reload()
+  await expect(page.getByLabel('Código promocional')).toHaveValue('')
+  await expect(page.getByText(/2\.703/)).toHaveCount(0)
+})
+
+test('cart quantity persists through refresh and guest items merge into the signed-in account', async ({ page }) => {
+  await page.goto('/carrinho')
+  const cosmicLine = page.locator('article').filter({ has: page.getByRole('heading', { name: 'Cosmic Bloom #118' }) })
+  await cosmicLine.getByRole('button', { name: 'Aumentar quantidade' }).click()
+  await expect(cosmicLine.getByText('3', { exact: true })).toBeVisible()
+  await page.reload()
+  await expect(page.locator('article').filter({ has: page.getByRole('heading', { name: 'Cosmic Bloom #118' }) }).getByText('3', { exact: true })).toBeVisible()
+
+  await page.goto('/login?returnTo=%2Fcarrinho')
+  await page.getByLabel('E-mail').fill('ana@kurio.test')
+  await page.getByLabel('Senha').fill('kurio123')
+  await page.getByRole('button', { name: 'Entrar' }).click()
+  await expect(page).toHaveURL(/\/carrinho$/)
+  const signedInLine = page.locator('article').filter({ has: page.getByRole('heading', { name: 'Cosmic Bloom #118' }) })
+  await expect(signedInLine.getByText('3', { exact: true })).toBeVisible()
+  await signedInLine.getByRole('button', { name: 'Remover Cosmic Bloom #118' }).click()
+  await expect(page.getByRole('heading', { name: 'Cosmic Bloom #118' })).toHaveCount(0)
+})
+
+test('favorite is saved to the account and restored after refresh', async ({ page }) => {
+  await page.goto('/login?returnTo=%2Fperfil')
+  await page.getByLabel('E-mail').fill('ana@kurio.test')
+  await page.getByLabel('Senha').fill('kurio123')
+  await page.getByRole('button', { name: 'Entrar' }).click()
+  await expect(page).toHaveURL(/\/perfil$/)
+  await page.goto('/mercado/042')
+  const favorite = page.getByRole('button', { name: 'Favoritar' })
+  await expect(favorite).toHaveAttribute('aria-pressed', 'false')
+  await favorite.click()
+  await expect(favorite).toHaveAttribute('aria-pressed', 'true')
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Favoritar' })).toHaveAttribute('aria-pressed', 'true')
+})
+
+test('expired session redirects to login and preserves checkout context', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('kurio-scenario', 'expired-session'))
+  await page.goto('/pagamento')
+  await expect(page).toHaveURL(/\/login\?returnTo=/)
+  await page.getByLabel('E-mail').fill('ana@kurio.test')
+  await page.getByLabel('Senha').fill('kurio123')
+  await page.getByRole('button', { name: 'Entrar' }).click()
+  await expect(page).toHaveURL(/\/pagamento$/)
+  await expect(page.getByRole('button', { name: 'Confirmar compra' })).toBeVisible()
+})
+
+test('login dialog traps keyboard focus and closes with Escape', async ({ page }) => {
+  await page.goto('/login')
+  const dialog = page.getByRole('dialog', { name: 'Entrar' })
+  await expect(dialog).toBeVisible()
+  await expect(dialog.locator(':focus')).toHaveCount(1)
+  await page.keyboard.press('Escape')
+  await expect(page).toHaveURL(/\/?(?:\?page=1)?$/)
+})
+
+test('timeout after order creation recovers the same idempotent request', async ({ page }) => {
+  const idempotencyKeys: string[] = []
+  page.on('request', (request) => {
+    if (request.method() === 'POST' && request.url().endsWith('/api/orders')) {
+      const key = request.headers()['idempotency-key']
+      if (key) idempotencyKeys.push(key)
+    }
+  })
+  await page.goto('/login?returnTo=%2Fpagamento')
+  await page.getByLabel('E-mail').fill('ana@kurio.test')
+  await page.getByLabel('Senha').fill('kurio123')
+  await page.getByRole('button', { name: 'Entrar' }).click()
+  await expect(page).toHaveURL(/\/pagamento$/)
+  await page.evaluate(() => localStorage.setItem('kurio-scenario', 'timeout-after-create'))
+  await page.getByRole('button', { name: 'Confirmar compra' }).click()
+  await expect(page.getByRole('alert')).toContainText('expirou')
+  await page.getByRole('button', { name: 'Confirmar compra' }).click()
+  await expect(page).toHaveURL(/\/confirmacao\/KUR-/)
+  await expect(page.getByRole('heading', { name: 'Pedido confirmado' })).toBeVisible({ timeout: 10_000 })
+  expect(idempotencyKeys).toHaveLength(2)
+  expect(idempotencyKeys[0]).toBe(idempotencyKeys[1])
 })

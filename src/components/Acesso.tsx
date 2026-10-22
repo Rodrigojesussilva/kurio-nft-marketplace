@@ -15,7 +15,7 @@ export function Acesso({ cadastro = false }: { cadastro?: boolean }) {
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? [])
+    const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? []).filter((element) => element.getClientRects().length > 0)
     focusable()[0]?.focus()
     const trapDialogFocus = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { void router.navigate({ to: '/' }); return }
@@ -57,7 +57,7 @@ export function Acesso({ cadastro = false }: { cadastro?: boolean }) {
       if (returnTo) {
         try {
           const target = new URL(returnTo, window.location.origin)
-          const allowedPath = target.pathname === '/pagamento' || target.pathname === '/perfil' || target.pathname === '/carteiras' || /^\/confirmacao\/[A-Za-z0-9-]+$/.test(target.pathname)
+          const allowedPath = target.pathname === '/carrinho' || target.pathname === '/pagamento' || target.pathname === '/perfil' || target.pathname === '/carteiras' || /^\/confirmacao\/[A-Za-z0-9-]+$/.test(target.pathname)
           if (target.origin === window.location.origin && allowedPath) destination = `${target.pathname}${target.search}${target.hash}`
         } catch { /* Invalid return locations fall back to the profile. */ }
       }

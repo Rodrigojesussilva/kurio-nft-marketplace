@@ -52,7 +52,15 @@ const getDatabase = async (): Promise<Database> => {
       const savedById = new Map(database.nfts.map((nft) => [nft.id, nft]))
       database.nfts = catalogNfts.map((fixture) => {
         const savedNft = savedById.get(fixture.id)
-        return savedNft ? { ...fixture, ...savedNft, name: fixture.name, image: fixture.image } : structuredClone(fixture)
+        if (!savedNft) return structuredClone(fixture)
+        const savedEditions = new Map((savedNft.edition ?? []).map((edition) => [edition.id, edition]))
+        return {
+          ...fixture,
+          ...savedNft,
+          name: fixture.name,
+          image: fixture.image,
+          edition: fixture.edition.map((edition) => ({ ...edition, ...savedEditions.get(edition.id) })),
+        }
       })
       saveDatabase()
       return database
@@ -91,7 +99,7 @@ const scenarioDelay = async () => {
   else if (current === 'variable-latency') {
     requestSequence += 1
     await delay(requestSequence % 2 === 0 ? 700 : 100)
-  } else await delay(180)
+  } else if (current !== 'standard') await delay(80)
 }
 
 const error = (status: number, code: string, message: string, details?: unknown) =>
