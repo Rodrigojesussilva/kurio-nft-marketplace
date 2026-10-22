@@ -550,7 +550,8 @@ const handlers = [
   }),
 ]
 
-const socketLink = ws.link(/\/socket\.io/)
+// MSW strips the Socket.IO transport prefix before matching WebSocket handlers.
+const socketLink = ws.link('/')
 const socketHandler = socketLink.addEventListener('connection', (connection) => {
   const binding = toSocketIo(connection)
   if (scenario() === 'socket-disconnect-once' && !socketDisconnectTriggered) {
