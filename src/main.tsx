@@ -72,6 +72,10 @@ const rootRoute = createRootRoute({
         void queryClient.invalidateQueries({ queryKey: ['cart'] })
         void queryClient.invalidateQueries({ queryKey: ['order'] })
       }
+      // The production demo is a static Vercel deployment with browser mocks,
+      // not a Socket.IO server. Avoid sending Engine.IO handshakes to the SPA rewrite.
+      const demoWithoutRealtime = import.meta.env.PROD && import.meta.env.VITE_MOCKS === 'true'
+      if (demoWithoutRealtime) return () => undefined
       socket.on('connect', reconcile)
       socket.on('nft.updated', onNftUpdated)
       socket.on('order.updated', onOrderUpdated)
