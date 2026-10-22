@@ -20,7 +20,7 @@ const catalogPreviewItems = [
 
 function CatalogPreview() {
   return <div className="mb-6 grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-6 md:grid-cols-3 lg:gap-x-10 lg:gap-y-20">
-    {catalogPreviewItems.map((item) => <article key={item.name} className="flex min-w-0 flex-col gap-2 even:mt-3 md:mt-0 md:gap-3"><div className="aspect-square overflow-hidden rounded-lg md:rounded-xl"><img src={item.image} alt="" className="h-full w-full object-cover md:rounded-xl" /></div><p className="truncate text-[10px] text-[#F5F0E6] md:text-lg">{item.name}</p><p className="mt-0.5 text-xs font-bold text-[#E8834A] md:mt-1 md:text-[22px]">{item.price} ETH</p></article>)}
+    {catalogPreviewItems.map((item) => <article key={item.name} className="flex min-w-0 flex-col gap-2 even:mt-3 md:even:mt-0 md:gap-3"><div className="aspect-square overflow-hidden rounded-lg md:rounded-xl"><img src={item.image} alt="" className="h-full w-full object-cover md:rounded-xl" /></div><p className="truncate text-[10px] text-[#F5F0E6] md:text-lg">{item.name}</p><p className="mt-0.5 text-xs font-bold text-[#E8834A] md:mt-1 md:text-[22px]">{item.price} ETH</p></article>)}
   </div>
 }
 
