@@ -57,7 +57,7 @@ export function DetalhesNFT() {
       </div>
 
       {/* ================= PARTE 1: CARD PRINCIPAL ================= */}
-      <div className="mb-8 flex flex-col gap-4 border-none md:mb-10 md:gap-8 lg:flex-row lg:gap-[42px]">
+      <div className="mb-8 flex flex-col gap-3 rounded-[22px] border-none bg-[#1A100C] p-3 md:mb-10 md:gap-8 md:bg-transparent md:p-0 lg:flex-row lg:gap-[42px]">
         
         {/* COLUNA ESQUERDA: Galeria */}
         <div className="flex w-full shrink-0 gap-[35px] lg:w-[716px]">
@@ -66,10 +66,10 @@ export function DetalhesNFT() {
               <img src={nft?.image ?? 'https://api.dicebear.com/9.x/bottts/svg?seed=pirate'} alt="" className="h-full w-full object-cover" />
             </button>)}
           </div>
-          <div className="min-w-0 flex-1 rounded-lg bg-[#241611] p-2 md:p-6">
-            <div className="relative aspect-square w-full overflow-hidden rounded-[28px]">
+          <div className="min-w-0 flex-1 rounded-lg bg-transparent p-0 md:bg-[#241611] md:p-6">
+            <div className="relative aspect-square w-full overflow-hidden rounded-2xl md:rounded-[28px]">
               <img src={nft?.image ?? 'https://api.dicebear.com/9.x/bottts/svg?seed=pirate'} alt={nft?.name ?? 'Imagem do NFT'} fetchPriority="high" loading="eager" className="h-full w-full object-cover" />
-              <div className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[#1C1310]/90 text-white shadow">
+              <div className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-[#1C1310]/90 text-white shadow md:h-10 md:w-10">
                 <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </div>
             </div>
@@ -78,25 +78,24 @@ export function DetalhesNFT() {
 
         {/* COLUNA DIREITA: Informações */}
         <div className="flex min-w-0 flex-1 flex-col border-none pt-0 lg:max-w-[716px]">
-          <h1 className="mb-1 text-xl font-black text-white md:mb-2 md:text-4xl">{nft?.name ?? 'Carregando NFT…'}</h1>
+          <h1 className="order-1 mb-1 text-sm font-black text-white md:mb-2 md:text-4xl">{nft?.name ?? 'Carregando NFT…'}</h1>
           
-          <div className="mb-4 flex items-center gap-2 border-b border-[#6B4228] pb-3 text-base text-[#A69C8F]">
-            <span className="text-xl font-bold text-[#E8834A] md:text-[28px]">{nft?.priceEth ?? '—'} ETH</span>
-            <span className="text-white/20 ml-2">•</span>
-            <div className="flex items-center gap-1 ml-2">
-              <span className="text-base tracking-tighter text-[#E8834A]">★★★★★</span>
-              <span className="ml-1 text-[10px] md:text-base">19 avaliações de colecionadores</span>
+          <div className="order-2 mb-2 flex items-center justify-between gap-2 border-b border-[#6B4228] pb-2 text-base text-[#A69C8F] md:mb-4 md:pb-3">
+            <span className="hidden text-xl font-bold text-[#E8834A] md:inline md:text-[28px]">{nft?.priceEth ?? '—'} ETH</span>
+            <div className="ml-auto flex items-center gap-1 rounded-full bg-[#2C1E17] px-1.5 py-0.5 md:ml-0 md:bg-transparent md:px-0">
+              <span className="text-[9px] tracking-tighter text-[#E8834A] md:text-base">★★★★★</span>
+              <span className="ml-1 text-[8px] md:text-base">4.8 (19)</span>
             </div>
           </div>
 
-          <div className="mb-4 border-none">
-            <h2 className="mb-1 text-sm font-bold text-white md:mb-1.5 md:text-lg">Sobre este NFT:</h2>
-            <p className="max-w-[720px] text-xs leading-relaxed text-[#C9A982] md:text-base md:leading-[1.7]">
+          <div className="order-3 mb-3 border-none md:order-none md:mb-4">
+            <h2 className="mb-1 hidden text-sm font-bold text-white md:block md:mb-1.5 md:text-lg">Sobre este NFT:</h2>
+            <p className="max-w-[720px] line-clamp-3 text-[9px] leading-relaxed text-[#C9A982] md:text-base md:leading-[1.7]">
               Um colecionável digital finalizado à mão da coleção Kurio Editions, verificado na Ethereum, com arte desbloqueável e acesso para colecionadores.
             </p>
           </div>
 
-          <div className="mb-5 border-none">
+          <div className="order-4 mb-3 border-none md:order-none md:mb-5">
             <h2 className="mb-2 text-sm font-bold text-white md:text-lg">Edição:</h2>
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#A69C8F] md:text-base">
               {editions.map((edition) => <button key={edition.id} type="button" disabled={edition.available === 0} aria-label={`${edition.label}${edition.available === 0 ? ' (esgotada)' : ` (${edition.available} disponíveis)`}`} aria-pressed={currentEdition?.id === edition.id} onClick={() => { setSelectedEdition(edition.id); setQuantity(1) }} className={`rounded-full border px-3 py-1 ${currentEdition?.id === edition.id ? 'border-[#E8834A] text-[#E8834A]' : 'border-[#6B4228] text-[#A69C8F]'} disabled:opacity-40`}>{edition.label}</button>)}
@@ -105,17 +104,21 @@ export function DetalhesNFT() {
             {!currentEdition && <p role="status" className="mt-2 text-sm text-amber-200">Todas as edições deste NFT estão esgotadas.</p>}
           </div>
 
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-base text-[#A69C8F]">
+          <div className="order-6 mb-3 flex flex-col items-stretch gap-3 md:order-none md:mb-5 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-4">
+            <div className="flex items-center justify-between gap-3 text-base text-[#A69C8F]">
+              <div className="flex items-center gap-3">
               <button type="button" aria-label="Diminuir quantidade" disabled={quantity <= 1} onClick={() => setQuantity((value) => Math.max(1, value - 1))} className="flex h-9 w-9 items-center justify-center rounded-full bg-[#D9824B] text-xl leading-none text-[#1A1411] disabled:opacity-50 md:h-[60px] md:w-10 md:text-3xl">−</button>
               <output aria-live="polite" className="min-w-7 text-center text-lg text-white md:text-2xl">{quantity}</output>
               <button type="button" aria-label="Aumentar quantidade" disabled={quantity >= maxQuantity} onClick={() => setQuantity((value) => Math.min(maxQuantity, value + 1))} className="flex h-9 w-9 items-center justify-center rounded-full bg-[#D9824B] text-xl leading-none text-[#1A1411] disabled:opacity-50 md:h-[60px] md:w-10 md:text-3xl">+</button>
+              </div>
+              <span className="text-xs font-bold text-[#E8834A] md:hidden">{nft?.priceEth ?? '—'} ETH</span>
             </div>
             <div className="flex items-center gap-3">
-            <button disabled={!nft || nftQuery.isFetching || !currentEdition || quantity > maxQuantity} onClick={() => { if (currentEdition) void addToCart(nftId, currentEdition.id, quantity).then(() => navigate({ to: '/carrinho' })).catch(() => undefined) }} className="rounded bg-[#D9824B] px-6 py-3 text-xs font-bold uppercase text-[#1A1411] transition hover:brightness-110 disabled:opacity-50 md:px-10 md:text-base">
+            <button disabled={!nft || nftQuery.isFetching || !currentEdition || quantity > maxQuantity} onClick={() => { if (currentEdition) void addToCart(nftId, currentEdition.id, quantity).then(() => navigate({ to: '/carrinho' })).catch(() => undefined) }} className="flex-1 rounded-full bg-[#D9824B] px-5 py-2.5 text-[10px] font-bold normal-case text-[#1A1411] transition hover:brightness-110 disabled:opacity-50 md:flex-none md:rounded md:px-10 md:py-3 md:text-base md:uppercase">
               Comprar
             </button>
-            <button type="button" aria-pressed={favorite} onClick={() => { if (!account) { void navigate({ to: '/login' }); return } favoriteMutation.mutate(!favorite) }} className={`flex items-center justify-center gap-2 rounded border px-3 py-2.5 text-xs font-bold transition md:px-5 md:py-3 md:text-base ${favorite ? 'border-[#E8834A] bg-[#E8834A]/10 text-[#E8834A]' : 'border-[#E8834A]/70 text-[#E8834A] hover:bg-white/5'}`}>
+            <button type="button" aria-label="Adicionar ao carrinho" onClick={() => { if (currentEdition) void addToCart(nftId, currentEdition.id, quantity).catch(() => undefined) }} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2C1E17] text-[#E8834A] md:hidden"><svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5m1.6 8-2 2h12"/></svg></button>
+            <button type="button" aria-pressed={favorite} onClick={() => { if (!account) { void navigate({ to: '/login' }); return } favoriteMutation.mutate(!favorite) }} className={`hidden items-center justify-center gap-2 rounded border px-3 py-2.5 text-xs font-bold transition md:flex md:px-5 md:py-3 md:text-base ${favorite ? 'border-[#E8834A] bg-[#E8834A]/10 text-[#E8834A]' : 'border-[#E8834A]/70 text-[#E8834A] hover:bg-white/5'}`}>
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
               Favoritar
             </button>
@@ -123,7 +126,7 @@ export function DetalhesNFT() {
             </div>
           </div>
 
-          <div className="mb-5 flex flex-col gap-3 border-none text-xs leading-relaxed text-[#C9A982] md:text-base">
+          <div className="order-5 mb-3 flex flex-col gap-1.5 border-none text-[8px] leading-relaxed text-[#A69C8F] md:order-none md:mb-5 md:gap-3 md:text-base">
             <p>ID do token: <span className="text-white font-mono">#0842</span></p>
             <p>Coleção: <span className="text-white font-mono">Kurio Apes</span></p>
             <p>Atributos: <span className="text-white font-mono">Óculos, Esmeralda, Raro</span></p>
