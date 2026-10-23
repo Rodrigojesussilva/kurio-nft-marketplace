@@ -119,22 +119,22 @@ export function Inicio({ backdrop = false }: { backdrop?: boolean }) {
 
     <div className="mx-auto mt-12 w-full px-8 pb-12 lg:pl-8 lg:pr-[56px]">
       <section aria-label="Destaques" className="mb-14 grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <article className="flex min-h-[170px] items-center gap-5 rounded-md bg-[#241611] p-3 sm:min-h-[190px] sm:gap-7">
+        <Link to="/mercado/$nftId" params={{ nftId: '042' }} reloadDocument aria-label="Ver detalhes de Emerald Ape #042" className="flex min-h-[170px] items-center gap-5 rounded-md bg-[#241611] p-3 transition hover:bg-[#2C1E17] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8834A] sm:min-h-[190px] sm:gap-7">
           <img src={emeraldImage} alt="Emerald Ape" className="h-24 w-24 shrink-0 rounded-md object-cover sm:h-36 sm:w-36 lg:h-40 lg:w-40" />
           <div className="flex-1 text-right">
             <h2 className="text-sm font-bold text-[#F5F0E6]">Lançamentos gênesis de edição limitada</h2>
             <p className="my-2 text-xs leading-relaxed text-[#C9A982]">Colecionáveis exclusivos diretamente dos criadores, com revelação para colecionadores.</p>
-            <Link to="/mercado" className="rounded bg-[#E8834A] px-4 py-1.5 text-xs font-bold text-[#1A1411]">Explorar →</Link>
+            <span className="inline-block rounded bg-[#E8834A] px-4 py-1.5 text-xs font-bold text-[#1A1411]">Explorar →</span>
           </div>
-        </article>
-        <article className="flex min-h-[170px] items-center gap-5 rounded-md bg-[#241611] p-3 sm:min-h-[190px] sm:gap-7">
+        </Link>
+        <Link to="/mercado/$nftId" params={{ nftId: '188' }} reloadDocument aria-label="Ver detalhes de Ivory Baron #188" className="flex min-h-[170px] items-center gap-5 rounded-md bg-[#241611] p-3 transition hover:bg-[#2C1E17] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8834A] sm:min-h-[190px] sm:gap-7">
           <img src={ivoryImage} alt="Ivory Baron" className="h-24 w-24 shrink-0 rounded-md object-cover sm:h-36 sm:w-36 lg:h-40 lg:w-40" />
           <div className="flex-1 text-right">
             <h2 className="text-sm font-bold text-[#F5F0E6]">Arte digital selecionada e muito mais</h2>
             <p className="my-2 text-xs leading-relaxed text-[#C9A982]">Explore novas artistas, coleções verificadas e obras digitais que definem a cultura.</p>
-            <Link to="/mercado" className="rounded bg-[#E8834A] px-4 py-1.5 text-xs font-bold text-[#1A1411]">Explorar →</Link>
+            <span className="inline-block rounded bg-[#E8834A] px-4 py-1.5 text-xs font-bold text-[#1A1411]">Explorar →</span>
           </div>
-        </article>
+        </Link>
       </section>
 
     </div>

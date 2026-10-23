@@ -11,7 +11,8 @@ import goldenImage from '../assets/images/Golden.webp'
 export function DetalhesNFT() {
   const navigate = useNavigate()
   const params = useParams({ strict: false }) as { nftId?: string }
-  const nftId = params.nftId ?? '042'
+  const pathNftId = window.location.pathname.match(/^\/mercado\/([^/]+)\/?$/)?.[1]
+  const nftId = pathNftId ?? params.nftId ?? '042'
   const { addToCart, account } = useShop()
   const queryClient = useQueryClient()
   const nftQuery = useQuery({ queryKey: ['nft', nftId], queryFn: ({ signal }) => getNft(nftId, signal) })
